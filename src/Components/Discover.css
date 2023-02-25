@@ -1,0 +1,21 @@
+.bgc {
+  background-image: url("../assets/benjamin-voros-phIFdC6lA4E-unsplash.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 100vh;
+  opacity: 1.5;
+}
+.background-tint {
+  background-color: rgb(0 0 0 / 47%);
+  background-blend-mode: multiply;
+}
+
+.circle {
+  margin: -50% 0% 20%;
+  padding: 17px 19px 10px;
+  background-color: var(--e-global-color-accent);
+  border-style: solid;
+  border-width: 5px;
+  border-color: #e85602;
+  border-radius: 50px 50px 50px 50px;
+}

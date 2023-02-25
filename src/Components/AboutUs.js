@@ -28,7 +28,7 @@ const AboutUs = () => {
           mt: -4.12,
           zIndex: 1500,
           background: "white",
-          mb: 20,
+
           px: "10%",
           py: "10%",
         }}
@@ -36,7 +36,10 @@ const AboutUs = () => {
         <Grid
           container
           spacing={{ xs: 2, md: 12 }}
+          rowSpacing={5}
           columns={{ xs: 4, sm: 8, md: 12 }}
+          alignItems="center"
+          justifyContent="center"
         >
           <Grid item xs={6}>
             <Grid item xs={12}>

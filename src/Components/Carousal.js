@@ -7,6 +7,7 @@ import img3 from "../assets/kalen-emsley-Bkci_8qcdvQ-unsplash.jpg";
 import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import Buttonn from "./Small/Button";
+import Searchh from "./Small/Search";
 
 function Carousal(props) {
   var items = [{ img: img1 }, { img: img2 }, { img: img3 }];
@@ -22,7 +23,7 @@ function Carousal(props) {
 
 function Item(props) {
   return (
-    <>
+    <Box sx={{ position: "relative" }}>
       <Paper>
         <img src={props.item.img} alt="Images" sx={{ zIndex: 900 }}></img>
       </Paper>
@@ -32,7 +33,7 @@ function Item(props) {
           //   top: { xs: "10%", sm: "40%" },
 
           position: "absolute",
-          top: "50%",
+          top: "54%",
           left: "20%",
           transform: "translate(-10%, -50%)",
 
@@ -52,6 +53,7 @@ function Item(props) {
             fontFamily: "serif-pro",
             lineHeight: { xs: "30px", sm: "40px", md: "80px" },
             pl: { xs: "1rem", md: "1rem", sm: "1rem" },
+            color: "black",
           }}
         >
           <span>Let's</span>
@@ -71,7 +73,7 @@ function Item(props) {
             mt: "5px",
           }}
         >
-          <span>Find Your Next Destination With Us</span>
+          <span>Find Your Next Travel Destination With Us</span>
         </Typography>
         <Box ml={"15px"}>
           <Buttonn
@@ -96,7 +98,19 @@ function Item(props) {
         <Box sx={{ border: 1, height: "10rem", width: "20%" }}></Box>
         <Box sx={{ border: 1, height: "10rem", width: "20%" }}></Box>
       </Box> */}
-    </>
+      <Box
+        sx={{
+          width: 500,
+          maxWidth: "100%",
+          position: "absolute",
+          left: { xs: "63%", md: "50%" },
+          bottom: { xs: "5%", md: "10%" },
+          transform: "translate(-50%)",
+        }}
+      >
+        <Searchh></Searchh>
+      </Box>
+    </Box>
   );
 }
 

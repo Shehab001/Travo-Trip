@@ -11,8 +11,8 @@ const Buttonn = (props) => {
           color: "white",
           borderRadius: 0,
           float: "left",
-          py: "12px",
-          px: "40px",
+          py: { sm: "2px", md: "12px" },
+          px: { sm: "20px", md: "40px" },
           mt: "20px",
           "&:hover": {
             background: `#${props.hoverColor}`,

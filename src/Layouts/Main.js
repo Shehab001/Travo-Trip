@@ -1,13 +1,12 @@
-import { Box } from "@mui/system";
 import React from "react";
 import { Outlet } from "react-router";
+
 import AboutUs from "../Components/AboutUs";
+import Discover from "../Components/Discover";
 import Footer from "../Components/Footer";
 import Home from "../Components/Home";
 import NavBar from "../Components/Navbar";
-import SignIn from "../Components/SignIn";
-import SignUp from "../Components/SignUp";
-import Button from "../Components/Small/Button";
+import Services from "../Components/Services";
 
 const Main = () => {
   return (
@@ -15,10 +14,9 @@ const Main = () => {
       <Home></Home>
       <NavBar></NavBar>
       <AboutUs></AboutUs>
+      <Services></Services>
       <Outlet></Outlet>
-      <SignIn></SignIn>
-      <Box sx={{ my: "30px" }}></Box>
-      <SignUp></SignUp>
+      <Discover></Discover>
       <Footer></Footer>
     </>
   );
