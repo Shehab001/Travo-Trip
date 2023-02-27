@@ -12,7 +12,6 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { Link, useLocation } from "react-router-dom";
-import "./CSS/Navbar.css";
 
 const pages = ["Home", "About", "Contact", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
