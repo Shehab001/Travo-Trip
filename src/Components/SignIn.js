@@ -45,7 +45,7 @@ export default function SignIn() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: "100vh", mt: -7 }}>
+      <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Grid
           item
@@ -69,6 +69,7 @@ export default function SignIn() {
             sx={{
               my: 8,
               mx: 4,
+              pt: 12,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",

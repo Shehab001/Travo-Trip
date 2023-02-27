@@ -22,6 +22,7 @@ const AboutUs = () => {
   return (
     <>
       <Box
+        id="aboutUs"
         position={"relative"}
         sx={{
           width: "100%",

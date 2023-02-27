@@ -14,6 +14,17 @@ import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 
 export default function Services() {
+  // const [data, setData] = React.useState([]);
+  // console.log(data);
+
+  // React.useEffect(() => {
+  //   fetch("https://travel-site-backend.vercel.app/allservices")
+  //     .then((res) => res.json())
+  //     .then((dataa) => {
+  //       setData(dataa);
+  //     });
+  // }, []);
+
   return (
     <Box Container sx={{ width: "100%", px: "10%" }}>
       <Grid

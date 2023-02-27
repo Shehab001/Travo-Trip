@@ -2,7 +2,7 @@ import { Grid, Paper, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import img from "../assets/fabio-comparelli-uq2E2V4LhCY-unsplash.jpg";
-import "./Discover.css";
+import "./CSS/Navbar.css";
 import Quoate from "./Small/Quoate";
 
 const Discover = () => {

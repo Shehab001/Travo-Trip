@@ -76,11 +76,13 @@ function Item(props) {
           <span>Find Your Next Travel Destination With Us</span>
         </Typography>
         <Box ml={"15px"}>
-          <Buttonn
-            color={"ff5d0d"}
-            hoverColor={"0A212D"}
-            name={"Know Us"}
-          ></Buttonn>
+          <a href="#aboutUs">
+            <Buttonn
+              color={"ff5d0d"}
+              hoverColor={"0A212D"}
+              name={"Know Us"}
+            ></Buttonn>
+          </a>
         </Box>
       </Box>
       {/* <Box

@@ -11,12 +11,8 @@ import Services from "../Components/Services";
 const Main = () => {
   return (
     <>
-      <Home></Home>
       <NavBar></NavBar>
-      <AboutUs></AboutUs>
-      <Services></Services>
       <Outlet></Outlet>
-      <Discover></Discover>
       <Footer></Footer>
     </>
   );

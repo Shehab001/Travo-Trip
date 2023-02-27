@@ -11,13 +11,18 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import { Link, useLocation } from "react-router-dom";
+import "./CSS/Navbar.css";
 
 const pages = ["Home", "About", "Contact", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const routes = ["signin", "signup"];
 
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const location = useLocation();
+  console.log(location.pathname);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -33,16 +38,29 @@ function NavBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
+  const homeStyle = {
+    background: "transparent",
+    boxShadow: "none",
+    position: "absolute",
+    top: 20,
+  };
   return (
     <Box>
       <AppBar
-        style={{
-          background: "transparent",
-          boxShadow: "none",
-          position: "absolute",
-          top: 20,
-        }}
+        sx={
+          location.pathname === "/signin || /signup"
+            ? {
+                background: "transparent",
+                pb: { md: 1 },
+                color: "black!important",
+              }
+            : {
+                background: homeStyle.background,
+                boxShadow: homeStyle.boxShadow,
+                position: homeStyle.position,
+                top: homeStyle.top,
+              }
+        }
       >
         <Container maxWidth="lg">
           <Toolbar disableGutters>
@@ -68,7 +86,7 @@ function NavBar() {
                 fontFamily: "monospace",
                 fontWeight: 700,
                 letterSpacing: ".3rem",
-                color: "inherit",
+                color: "black",
                 textDecoration: "none",
                 fontSize: 40,
                 mt: 2,
@@ -84,7 +102,7 @@ function NavBar() {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleOpenNavMenu}
-                color="inherit"
+                color="black"
               >
                 <MenuIcon />
               </IconButton>
@@ -108,7 +126,9 @@ function NavBar() {
               >
                 {pages.map((page) => (
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page}</Typography>
+                    <Typography textAlign="center" color={"black"}>
+                      {page}
+                    </Typography>
                   </MenuItem>
                 ))}
               </Menu>
@@ -137,7 +157,7 @@ function NavBar() {
                 fontFamily: "monospace",
                 fontWeight: 700,
                 letterSpacing: ".3rem",
-                color: "inherit",
+                color: "black",
                 textDecoration: "none",
               }}
             >
@@ -148,7 +168,7 @@ function NavBar() {
                 <Button
                   key={page}
                   onClick={handleCloseNavMenu}
-                  sx={{ mt: 3, color: "white", display: "block", fontSize: 16 }}
+                  sx={{ mt: 3, color: "black", display: "block", fontSize: 16 }}
                 >
                   {page}
                 </Button>
@@ -179,7 +199,9 @@ function NavBar() {
               >
                 {settings.map((setting) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                    <Typography textAlign="center">
+                      <Link to={routes[1]}>{setting}</Link>
+                    </Typography>
                   </MenuItem>
                 ))}
               </Menu>
