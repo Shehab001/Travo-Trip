@@ -26,7 +26,7 @@ export default function Services() {
   // }, []);
 
   return (
-    <Box Container sx={{ width: "100%", px: "10%" }}>
+    <Box Container sx={{ width: "100%", px: "10%", my: 16 }}>
       <Grid
         container
         rowSpacing={1}

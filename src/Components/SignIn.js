@@ -54,7 +54,7 @@ export default function SignIn() {
           md={7}
           sx={{
             backgroundImage:
-              "url(https://res.cloudinary.com/dc9bjecdl/image/upload/v1677279140/karsten-winegeart-jVT8vo04UT0-unsplash_c9im2c.jpg)",
+              "url(https://res.cloudinary.com/dc9bjecdl/image/upload/v1677568522/john-rodenn-castillo-eluzJSfkNCk-unsplash_awk3e7.jpg)",
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"

@@ -1,0 +1,19 @@
+.Appp {
+  font-family: sans-serif;
+  text-align: center;
+  margin-top: 10%;
+}
+
+@media (min-width: 600px) {
+  .Appp {
+    margin-left: 10em;
+    margin-right: 10em;
+  }
+}
+
+@media (min-width: 1500px) {
+  .Appp {
+    margin-left: 25em;
+    margin-right: 25em;
+  }
+}

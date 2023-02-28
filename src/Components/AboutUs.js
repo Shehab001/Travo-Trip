@@ -222,11 +222,15 @@ const AboutUs = () => {
               </p>
             </Typography>
             <Td></Td>
-            <Buttonn
-              color={"ff5d0d"}
-              hoverColor={"0A212D"}
-              name={"Get Started"}
-            ></Buttonn>
+
+            <a href="#category">
+              {" "}
+              <Buttonn
+                color={"ff5d0d"}
+                hoverColor={"0A212D"}
+                name={"Get Started"}
+              ></Buttonn>
+            </a>
           </Grid>
         </Grid>
       </Box>

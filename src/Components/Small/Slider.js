@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../CSS/Slider.css";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+import Rating from "@mui/material/Rating";
+import Stack from "@mui/material/Stack";
+
 const ReactCardSlider = (props) => {
   const slideLeft = () => {
     var slider = document.getElementById("slider");
@@ -21,6 +24,7 @@ const ReactCardSlider = (props) => {
       />
       <div id="slider">
         {props.slides.map((slide, index) => {
+          //console.log(slide.object, index);
           return (
             <div
               className="slider-card"
@@ -30,12 +34,33 @@ const ReactCardSlider = (props) => {
               <div
                 className="slider-card-image"
                 style={{
-                  backgroundImage: `url(${slide.image})`,
+                  backgroundImage: `url(${slide.img})`,
                   backgroundSize: "cover",
                 }}
               ></div>
-              <p className="slider-card-title">{slide.title}</p>
-              <p className="slider-card-description">{slide.description}</p>
+              <div className="description-controller">
+                <p className="slider-card-title"> {slide.name}</p>
+
+                <p className="slider-card-description">{slide.title}</p>
+                <p className="slider-card-description">
+                  Attended : {slide.total_taken}
+                </p>
+                <div className="info">
+                  <p className="slider-card-info">
+                    <Stack spacing={1}>
+                      <Rating
+                        name="half-rating-read"
+                        defaultValue={slide.rating}
+                        precision={0.5}
+                        readOnly
+                      />
+                    </Stack>
+                  </p>
+                  <p className="slider-card-money">
+                    <span>৳</span> {slide.price}
+                  </p>
+                </div>
+              </div>
             </div>
           );
         })}

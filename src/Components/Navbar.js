@@ -14,14 +14,15 @@ import MenuItem from "@mui/material/MenuItem";
 import { Link, useLocation } from "react-router-dom";
 
 const pages = ["Home", "About", "Contact", "Blog"];
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const route = ["/", "aboutUs", "contact", "blog"];
+const settings = ["Sign In", "Sign Up", "Logout"];
 const routes = ["signin", "signup"];
 
 function NavBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const location = useLocation();
-  console.log(location.pathname);
+  //console.log(location.pathname);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -123,10 +124,10 @@ function NavBar() {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                {pages.map((page) => (
+                {pages.map((page, index) => (
                   <MenuItem key={page} onClick={handleCloseNavMenu}>
                     <Typography textAlign="center" color={"black"}>
-                      {page}
+                      <Link to={route[index]}>{page}</Link>
                     </Typography>
                   </MenuItem>
                 ))}
@@ -163,13 +164,13 @@ function NavBar() {
               Travo
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {pages.map((page) => (
+              {pages.map((page, index) => (
                 <Button
                   key={page}
                   onClick={handleCloseNavMenu}
                   sx={{ mt: 3, color: "black", display: "block", fontSize: 16 }}
                 >
-                  {page}
+                  <Link to={route[index]}>{page}</Link>
                 </Button>
               ))}
             </Box>
@@ -196,10 +197,10 @@ function NavBar() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting) => (
+                {settings.map((setting, index) => (
                   <MenuItem key={setting} onClick={handleCloseUserMenu}>
                     <Typography textAlign="center">
-                      <Link to={routes[1]}>{setting}</Link>
+                      <Link to={routes[index]}>{setting}</Link>
                     </Typography>
                   </MenuItem>
                 ))}

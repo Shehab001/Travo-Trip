@@ -1,67 +1,68 @@
-import { Box } from "@mui/material";
-import React from "react";
+import { Box, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
+import Loader from "./Small/Loader";
 import ReactCardSlider from "./Small/Slider";
 
 const Category = () => {
-  const sliderClick = (slider) => {
-    alert("hello world");
-  };
+  const [data, setData] = useState([]);
+  const [spin, setSpin] = useState(false);
+  //useDocumentTitle("Travo Services");
+  console.log(data[0]);
 
-  const slides = [
-    {
-      id: 1,
-      image: "https://picsum.photos/200/300",
-      title: "This is a title",
-      description: "This is a description",
-      clickEvent: sliderClick,
-    },
-    {
-      id: 2,
-      image: "https://picsum.photos/600/500",
-      title: "This is a second title",
-      description: "This is a second description",
-      clickEvent: sliderClick,
-    },
-    {
-      id: 3,
-      image: "https://picsum.photos/700/600",
-      title: "This is a third title",
-      description: "This is a third description",
-      clickEvent: sliderClick,
-    },
-    {
-      id: 4,
-      image: "https://picsum.photos/500/400",
-      title: "This is a fourth title",
-      description: "This is a fourth description",
-      clickEvent: sliderClick,
-    },
-    {
-      id: 5,
-      image: "https://picsum.photos/200/300",
-      title: "This is a fifth title",
-      description: "This is a fifth description",
-      clickEvent: sliderClick,
-    },
-    {
-      id: 6,
-      image: "https://picsum.photos/800/700",
-      title: "This is a sixth title",
-      description: "This is a sixth description",
-      clickEvent: sliderClick,
-    },
-    {
-      id: 7,
-      image: "https://picsum.photos/300/400",
-      title: "This is a seventh title",
-      description: "This is a seventh description",
-      clickEvent: sliderClick,
-    },
-  ];
+  useEffect(() => {
+    setSpin(true);
+    fetch("https://travel-site-backend.vercel.app/allservices")
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data);
+        setSpin(false);
+      });
+  }, []);
 
   return (
-    <Box sx={{ px: "9.1%" }}>
-      <ReactCardSlider keys={slides.id} slides={slides} />
+    <Box id="category" sx={{ px: "9.1%", mt: 5, mb: 10 }}>
+      {spin === true ? (
+        <Loader></Loader>
+      ) : (
+        <Box>
+          <Typography
+            sx={{
+              color: "#ff5d0d",
+              fontSize: "16px",
+              textAlign: "center",
+              fontWeight: "bold",
+              letterSpacing: "5px",
+            }}
+          >
+            TOUR PACKAGE
+          </Typography>
+          <Typography
+            sx={{
+              color: "black",
+              fontSize: { xs: "20px", md: "40px" },
+              textAlign: "center",
+              fontWeight: "bold",
+              letterSpacing: "5px",
+            }}
+          >
+            Make Memories With Us
+          </Typography>
+          <Typography
+            sx={{
+              px: { xs: "5%", sm: "12%", md: "15%" },
+              opacity: 0.5,
+              mt: 2,
+              mb: 5,
+            }}
+          >
+            A tour package is advertised journey including specific features,
+            arranged and promoted with tour literature by a tour operator and
+            paid for in full by the tourists before starting the tour.
+          </Typography>
+        </Box>
+      )}
+
+      <ReactCardSlider slides={data} />
     </Box>
   );
 };
