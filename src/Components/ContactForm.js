@@ -35,7 +35,7 @@ function ContactForm() {
   };
 
   return (
-    <Box className="Appp">
+    <Box id="contact" className="Appp">
       <ToastContainer
         position="top-center"
         autoClose={5000}

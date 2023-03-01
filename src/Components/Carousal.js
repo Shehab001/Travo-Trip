@@ -1,7 +1,7 @@
 import React from "react";
 import Carousel from "react-material-ui-carousel";
 import { Paper } from "@mui/material";
-import img1 from "../assets/daniel-roth-QHTch5kP2qY-unsplash.jpg";
+import img1 from "../assets/yang-wewe-SPpnLb94qnE-unsplash.jpg";
 import img2 from "../assets/frank-mckenna-OD9EOzfSOh0-unsplash.jpg";
 import img3 from "../assets/frank-mckenna-pXFETxj7lzg-unsplash.jpg";
 import Box from "@mui/material/Box";

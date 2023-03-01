@@ -7,7 +7,7 @@ const Category = () => {
   const [data, setData] = useState([]);
   const [spin, setSpin] = useState(false);
   //useDocumentTitle("Travo Services");
-  console.log(data[0]);
+  console.log(data);
 
   useEffect(() => {
     setSpin(true);

@@ -11,18 +11,28 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { Link, useLocation } from "react-router-dom";
-
-const pages = ["Home", "About", "Contact", "Blog"];
-const route = ["/", "aboutUs", "contact", "blog"];
-const settings = ["Sign In", "Sign Up", "Logout"];
-const routes = ["signin", "signup"];
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../Context/Context";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function NavBar() {
+  const { user, logOut } = React.useContext(AuthContext);
+  console.log(user?.photoURL);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const location = useLocation();
+  let navigate = useNavigate();
   //console.log(location.pathname);
+
+  const handleBtn = () => {
+    logOut()
+      .then(() => {
+        navigate("/");
+        toast.success("Logged Out");
+      })
+      .catch((error) => console.error(error));
+  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -30,22 +40,21 @@ function NavBar() {
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
   const homeStyle = {
     background: "transparent",
-    boxShadow: "none",
+    boxShadow: "5",
     position: "absolute",
-    top: 20,
   };
+
   return (
     <Box>
+      <ToastContainer position="top-center" />
       <AppBar
         sx={
           location.pathname === "/signin || /signup"
@@ -53,6 +62,7 @@ function NavBar() {
                 background: "transparent",
                 pb: { md: 1 },
                 color: "black!important",
+                boxShadow: "5",
               }
             : {
                 background: homeStyle.background,
@@ -124,13 +134,26 @@ function NavBar() {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                {pages.map((page, index) => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center" color={"black"}>
-                      <Link to={route[index]}>{page}</Link>
-                    </Typography>
-                  </MenuItem>
-                ))}
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center" color={"black"}>
+                    <Link to="/">Home</Link>
+                  </Typography>
+                </MenuItem>
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center" color={"black"}>
+                    <a href="#aboutUs">About Us</a>
+                  </Typography>
+                </MenuItem>
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center" color={"black"}>
+                    <a href="#contact">Contact</a>
+                  </Typography>
+                </MenuItem>
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center" color={"black"}>
+                    <Link to="/">Blog</Link>
+                  </Typography>
+                </MenuItem>
               </Menu>
             </Box>
 
@@ -164,25 +187,98 @@ function NavBar() {
               Travo
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {pages.map((page, index) => (
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ mt: 3, color: "black", display: "block", fontSize: 16 }}
-                >
-                  <Link to={route[index]}>{page}</Link>
-                </Button>
-              ))}
+              {/* bar */}
+
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{
+                  mt: 3,
+                  color: "black",
+                  display: "block",
+                  fontSize: 16,
+                  "&:hover": {
+                    transform: "scale(1.1)",
+                    boxShadow: 5,
+                    transition: "linear .3s",
+                    borderBottom: 3,
+                    borderColor: "black",
+                  },
+                }}
+              >
+                <Link to="/">Home</Link>
+              </Button>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{
+                  mt: 3,
+                  color: "black",
+                  display: "block",
+                  fontSize: 16,
+                  "&:hover": {
+                    transform: "scale(1.1)",
+                    boxShadow: 5,
+                    transition: "linear .3s",
+                    borderBottom: 3,
+                    borderColor: "black",
+                  },
+                }}
+              >
+                <a href="#aboutUs">About Us</a>
+              </Button>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{
+                  mt: 3,
+                  color: "black",
+                  display: "block",
+                  fontSize: 16,
+                  "&:hover": {
+                    transform: "scale(1.1)",
+                    boxShadow: 5,
+                    transition: "linear .3s",
+                    borderBottom: 3,
+                    borderColor: "black",
+                  },
+                }}
+              >
+                <a href="#contact">Contact</a>
+              </Button>
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{
+                  mt: 3,
+                  color: "black",
+                  display: "block",
+                  fontSize: 16,
+                  "&:hover": {
+                    transform: "scale(1.1)",
+                    boxShadow: 5,
+                    transition: "linear .3s",
+                    borderBottom: 3,
+                    borderColor: "black",
+                  },
+                }}
+              >
+                <Link to="/blog">Blog</Link>
+              </Button>
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
                 <IconButton onClick={handleOpenUserMenu} sx={{ pt: 2 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                  {user?.uid ? (
+                    <Avatar
+                      sx={{ width: 56, height: 56 }}
+                      alt="User Image"
+                      src={user.photoURL}
+                    />
+                  ) : (
+                    <Avatar src="/broken-image.jpg" />
+                  )}
                 </IconButton>
               </Tooltip>
               <Menu
-                sx={{ mt: "45px" }}
+                sx={{ mt: "85px" }}
                 id="menu-appbar"
                 anchorEl={anchorElUser}
                 anchorOrigin={{
@@ -197,13 +293,27 @@ function NavBar() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                {settings.map((setting, index) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem onClick={handleCloseUserMenu}>
+                  {user?.uid ? (
                     <Typography textAlign="center">
-                      <Link to={routes[index]}>{setting}</Link>
+                      <Button onClick={handleBtn}>Log Out</Button>
                     </Typography>
-                  </MenuItem>
-                ))}
+                  ) : (
+                    <Box>
+                      <MenuItem>
+                        <Button size="small">
+                          <Link to="/signup">Sign Up</Link>
+                        </Button>
+                      </MenuItem>
+
+                      <MenuItem>
+                        <Button size="small">
+                          <Link to="/signin">Sign In</Link>
+                        </Button>
+                      </MenuItem>
+                    </Box>
+                  )}
+                </MenuItem>
               </Menu>
             </Box>
           </Toolbar>
