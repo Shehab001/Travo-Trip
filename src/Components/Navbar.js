@@ -18,7 +18,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function NavBar() {
   const { user, logOut } = React.useContext(AuthContext);
-  console.log(user?.photoURL);
+  // console.log(user?.photoURL);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const location = useLocation();
@@ -53,7 +53,7 @@ function NavBar() {
   };
 
   return (
-    <Box>
+    <Box id="nav">
       <ToastContainer position="top-center" />
       <AppBar
         sx={
@@ -76,7 +76,7 @@ function NavBar() {
           <Toolbar disableGutters>
             <Avatar
               alt="Icon"
-              src="https://res.cloudinary.com/dc9bjecdl/image/upload/v1667949925/Assignment%2011/beach-tour-logo-4505456896-seeklogo.com_hnehgp.png"
+              src="https://res.cloudinary.com/dc9bjecdl/image/upload/v1677643965/travel-101-512_vsaqzq.png"
               sx={{
                 width: 58,
                 height: 58,
@@ -105,7 +105,12 @@ function NavBar() {
               Travo
             </Typography>
 
-            <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+            <Box
+              sx={{
+                flexGrow: 1,
+                display: { xs: "flex", md: "none" },
+              }}
+            >
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -131,38 +136,70 @@ function NavBar() {
                 open={Boolean(anchorElNav)}
                 onClose={handleCloseNavMenu}
                 sx={{
-                  display: { xs: "block", md: "none" },
+                  display: { xs: "block", md: "none", zIndex: 3000 },
                 }}
               >
-                <MenuItem onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center" color={"black"}>
-                    <Link to="/">Home</Link>
-                  </Typography>
-                </MenuItem>
-                <MenuItem onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center" color={"black"}>
-                    <a href="#aboutUs">About Us</a>
-                  </Typography>
-                </MenuItem>
-                <MenuItem onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center" color={"black"}>
-                    <a href="#contact">Contact</a>
-                  </Typography>
-                </MenuItem>
-                <MenuItem onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center" color={"black"}>
-                    <Link to="/">Blog</Link>
-                  </Typography>
-                </MenuItem>
+                {" "}
+                {location.pathname === "/" ? (
+                  <>
+                    <MenuItem onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center" color={"black"}>
+                        <Link to="/">Home</Link>
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center" color={"black"}>
+                        <a href="#aboutUs">About Us</a>
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center" color={"black"}>
+                        <a href="#contact">Contact</a>
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center" color={"black"}>
+                        <Link to="/">Blog</Link>
+                      </Typography>
+                    </MenuItem>
+                    {user?.uid && (
+                      <>
+                        <MenuItem onClick={handleCloseNavMenu}>
+                          <Typography textAlign="center" color={"black"}>
+                            <a href="myreview">My Review</a>
+                          </Typography>
+                        </MenuItem>
+                        <MenuItem onClick={handleCloseNavMenu}>
+                          <Typography textAlign="center" color={"black"}>
+                            <Link to="addservice">Add Service</Link>
+                          </Typography>
+                        </MenuItem>
+                      </>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <MenuItem onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center" color={"black"}>
+                        <Link to="/">Home</Link>
+                      </Typography>
+                    </MenuItem>
+                    <MenuItem onClick={handleCloseNavMenu}>
+                      <Typography textAlign="center" color={"black"}>
+                        <Link to="/">Blog</Link>
+                      </Typography>
+                    </MenuItem>
+                  </>
+                )}
               </Menu>
             </Box>
 
             <Avatar
               alt="Icon"
-              src="https://res.cloudinary.com/dc9bjecdl/image/upload/v1667949925/Assignment%2011/beach-tour-logo-4505456896-seeklogo.com_hnehgp.png"
+              src="https://res.cloudinary.com/dc9bjecdl/image/upload/v1677643965/travel-101-512_vsaqzq.png"
               sx={{
-                width: 24,
-                height: 24,
+                width: 54,
+                height: 54,
                 display: { xs: "flex", md: "none" },
                 mr: 1,
               }}
@@ -182,85 +219,131 @@ function NavBar() {
                 letterSpacing: ".3rem",
                 color: "black",
                 textDecoration: "none",
+                fontSize: "40px",
               }}
             >
               Travo
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
               {/* bar */}
-
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{
-                  mt: 3,
-                  color: "black",
-                  display: "block",
-                  fontSize: 16,
-                  "&:hover": {
-                    transform: "scale(1.1)",
-                    boxShadow: 5,
-                    transition: "linear .3s",
-                    borderBottom: 3,
-                    borderColor: "black",
-                  },
-                }}
-              >
-                <Link to="/">Home</Link>
-              </Button>
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{
-                  mt: 3,
-                  color: "black",
-                  display: "block",
-                  fontSize: 16,
-                  "&:hover": {
-                    transform: "scale(1.1)",
-                    boxShadow: 5,
-                    transition: "linear .3s",
-                    borderBottom: 3,
-                    borderColor: "black",
-                  },
-                }}
-              >
-                <a href="#aboutUs">About Us</a>
-              </Button>
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{
-                  mt: 3,
-                  color: "black",
-                  display: "block",
-                  fontSize: 16,
-                  "&:hover": {
-                    transform: "scale(1.1)",
-                    boxShadow: 5,
-                    transition: "linear .3s",
-                    borderBottom: 3,
-                    borderColor: "black",
-                  },
-                }}
-              >
-                <a href="#contact">Contact</a>
-              </Button>
-              <Button
-                onClick={handleCloseNavMenu}
-                sx={{
-                  mt: 3,
-                  color: "black",
-                  display: "block",
-                  fontSize: 16,
-                  "&:hover": {
-                    transform: "scale(1.1)",
-                    boxShadow: 5,
-                    transition: "linear .3s",
-                    borderBottom: 3,
-                    borderColor: "black",
-                  },
-                }}
-              >
-                <Link to="/blog">Blog</Link>
-              </Button>
+              {location.pathname === "/" ? (
+                <>
+                  <Button
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      mt: 3,
+                      color: "black",
+                      display: "block",
+                      fontSize: 16,
+                      "&:hover": {
+                        transform: "scale(1.1)",
+                        boxShadow: 5,
+                        transition: "linear .3s",
+                        borderBottom: 3,
+                        borderColor: "black",
+                      },
+                    }}
+                  >
+                    <Link to="/">Home</Link>
+                  </Button>
+                  <Button
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      mt: 3,
+                      color: "black",
+                      display: "block",
+                      fontSize: 16,
+                      "&:hover": {
+                        transform: "scale(1.1)",
+                        boxShadow: 5,
+                        transition: "linear .3s",
+                        borderBottom: 3,
+                        borderColor: "black",
+                      },
+                    }}
+                  >
+                    <a href="#aboutUs">About Us</a>
+                  </Button>
+                  <Button
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      mt: 3,
+                      color: "black",
+                      display: "block",
+                      fontSize: 16,
+                      "&:hover": {
+                        transform: "scale(1.1)",
+                        boxShadow: 5,
+                        transition: "linear .3s",
+                        borderBottom: 3,
+                        borderColor: "black",
+                      },
+                    }}
+                  >
+                    <a href="#contact">Contact</a>
+                  </Button>
+                  <Button
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      mt: 3,
+                      color: "black",
+                      display: "block",
+                      fontSize: 16,
+                      "&:hover": {
+                        transform: "scale(1.1)",
+                        boxShadow: 5,
+                        transition: "linear .3s",
+                        borderBottom: 3,
+                        borderColor: "black",
+                      },
+                    }}
+                  >
+                    <Link to="/blog">Blog</Link>
+                  </Button>
+                </>
+              ) : (
+                <></>
+              )}
+              {user?.uid && (
+                <>
+                  <Button
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      mt: 3,
+                      color: "black",
+                      display: "block",
+                      fontSize: 16,
+                      "&:hover": {
+                        transform: "scale(1.1)",
+                        boxShadow: 5,
+                        transition: "linear .3s",
+                        borderBottom: 3,
+                        borderColor: "black",
+                      },
+                    }}
+                  >
+                    <Link to="/addservice">Add Service</Link>
+                  </Button>
+                  <Button
+                    onClick={handleCloseNavMenu}
+                    sx={{
+                      mt: 3,
+                      color: "black",
+                      display: "block",
+                      fontSize: 16,
+                      "&:hover": {
+                        transform: "scale(1.1)",
+                        boxShadow: 5,
+                        transition: "linear .3s",
+                        borderBottom: 3,
+                        borderColor: "black",
+                      },
+                    }}
+                  >
+                    <Link to="/myreview">My Review</Link>
+                  </Button>
+                </>
+              )}
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>

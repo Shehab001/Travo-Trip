@@ -43,7 +43,6 @@ const Discover = () => {
             </Typography>
             <Typography
               sx={{
-                color: "#6d7a81",
                 fontFamily: "Overpass, sans-serif",
                 fontSize: "17px",
                 mt: "3%",
