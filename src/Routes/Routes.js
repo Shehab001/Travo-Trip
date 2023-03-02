@@ -7,6 +7,7 @@ import Private from "../Components/Private/Private";
 import SignIn from "../Components/SignIn";
 import SignUP from "../Components/SignUp";
 import SingleService from "../Components/SingleService";
+
 import Main from "../Layouts/Main";
 
 const router = createBrowserRouter([

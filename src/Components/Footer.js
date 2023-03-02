@@ -1,5 +1,6 @@
 import React from "react";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { Box } from "@mui/material";
 const Footer = () => {
   return (
     <div>

@@ -50,6 +50,8 @@ function NavBar() {
     background: "transparent",
     boxShadow: "5",
     position: "absolute",
+    top: 20,
+    // zIndex: 1500,
   };
 
   return (
@@ -68,7 +70,8 @@ function NavBar() {
                 background: homeStyle.background,
                 boxShadow: homeStyle.boxShadow,
                 position: homeStyle.position,
-                top: homeStyle.top,
+
+                zIndex: homeStyle.zIndex,
               }
         }
       >
@@ -208,7 +211,7 @@ function NavBar() {
               variant="h5"
               noWrap
               component="a"
-              href=""
+              href="/"
               sx={{
                 mr: 2,
                 ml: 1,
@@ -361,7 +364,7 @@ function NavBar() {
                 </IconButton>
               </Tooltip>
               <Menu
-                sx={{ mt: "85px" }}
+                sx={{ mt: "85px", zIndex: 5000 }}
                 id="menu-appbar"
                 anchorEl={anchorElUser}
                 anchorOrigin={{

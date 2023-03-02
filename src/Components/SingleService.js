@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Box, Stack } from "@mui/system";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router";
 import { Link } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -20,13 +20,20 @@ import Buttonn from "./Small/Button";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import Loader from "./Small/Loader";
+import { AuthContext } from "../Context/Context";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SingleService = () => {
   const data = useLoaderData();
   const [reviews, setReviews] = useState([]);
-  const [value, setValue] = useState([]);
+  const [star, setStar] = useState([]);
+  const [review, setReview] = useState([]);
   const [spin, setSpin] = useState([]);
-  console.log(data, reviews);
+  const [refresh, setRefresh] = useState(false);
+  const { user } = useContext(AuthContext);
+  //console.log(data, reviews);
+  // console.log(star, review);
 
   useEffect(() => {
     setSpin(true);
@@ -36,7 +43,35 @@ const SingleService = () => {
         setReviews(data);
         setSpin(false);
       });
-  }, [data._id]);
+  }, [data._id, refresh]);
+
+  const handleReview = () => {
+    setSpin(true);
+    const info = {
+      title: data.name,
+      id: data._id,
+      email: user.email,
+      review: review,
+      star: star,
+    };
+    console.log(info);
+
+    fetch("https://travel-site-backend.vercel.app/addreview", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(info),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.acknowledged) {
+          toast.success("Review Added");
+          setSpin(false);
+        }
+        setRefresh(!refresh);
+      });
+  };
 
   return (
     <Box
@@ -44,11 +79,22 @@ const SingleService = () => {
         backgroundImage:
           "url(https://res.cloudinary.com/dc9bjecdl/image/upload/v1677655272/frank-mckenna-pXFETxj7lzg-unsplash_yvrrvq.jpg)",
         backgroundRepeat: "no-repeat",
-
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <Grid container component="main" sx={{}}>
         <CssBaseline />
         <Grid
@@ -212,7 +258,7 @@ const SingleService = () => {
                       <Stack spacing={1} sx={{ mt: 1, ml: 3 }}>
                         <Rating
                           name="half-rating-read"
-                          defaultValue={5}
+                          defaultValue={review?.star}
                           precision={0.5}
                           readOnly
                         />
@@ -227,25 +273,31 @@ const SingleService = () => {
                 <Box
                   sx={{
                     textAlign: "start",
-                    ml: 2,
+
                     p: 2,
                   }}
                 >
                   <Rating
                     name="simple-controlled"
-                    value={value}
+                    value={star}
                     onChange={(event, newValue) => {
-                      setValue(newValue);
+                      setStar(newValue);
                     }}
                   />
+
                   <TextField
-                    id="outlined-basic"
+                    id="review"
                     label="Review"
+                    name="textt"
                     variant="outlined"
                     sx={{ width: "80%" }}
                     required
+                    onBlur={(evt) => {
+                      setReview(evt.target.value);
+                    }}
                   />
                   <ControlPointIcon
+                    onClick={handleReview}
                     sx={{
                       fontSize: 50,
                       ml: 2,
