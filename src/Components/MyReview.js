@@ -1,4 +1,4 @@
-import { Grid, Rating, Typography } from "@mui/material";
+import { Grid, Rating, TextField, Typography } from "@mui/material";
 import { Box, Stack } from "@mui/system";
 import React, { useContext, useEffect, useState } from "react";
 import Tilt from "react-tilt";
@@ -9,14 +9,17 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Particle from "./Small/Particle";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 const MyReview = () => {
   const { user } = useContext(AuthContext);
   //console.log("k", user);
   const [myreview, setMyreview] = useState([]);
   const [refresh, setRefresh] = useState(false);
-  const [id, setId] = useState({});
-  //console.log(id);
+  const [idDelete, setIdDelete] = useState({});
+  const [idEdit, setIdEdit] = useState({});
+  const [rating, setRating] = useState({});
+  console.log(rating, idEdit, idDelete);
 
   const [spin, setSpin] = React.useState(false);
   //console.log(myreview.length);
@@ -33,7 +36,7 @@ const MyReview = () => {
 
   const deleteReview = () => {
     // console.log(id);
-    fetch(`https://travel-site-backend.vercel.app/deletereview/${id}`, {
+    fetch(`https://travel-site-backend.vercel.app/deletereview/${idDelete}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -43,8 +46,39 @@ const MyReview = () => {
           //notify("Review Deleted.");
           setRefresh(!refresh);
           toast.success("Review Deleted.");
+        } else {
+          toast.error("Error");
         }
       });
+  };
+
+  const handleForm = (event) => {
+    event.preventDefault();
+
+    const form = event.target;
+
+    const name = { review: `${form.review.value}`, star: rating };
+    console.log(name);
+
+    fetch(`https://travel-site-backend.vercel.app/updatereview/${idEdit}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(name),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          // alert(refresh);
+          toast.success("Review Edited.");
+          setRefresh(!refresh);
+        } else {
+          toast.error("Error");
+        }
+      });
+    setIdEdit(null);
+    form.reset();
   };
 
   return (
@@ -197,21 +231,70 @@ const MyReview = () => {
                             fontSize: { xs: "12px", sm: "18px" },
                           }}
                         >
-                          {review.review}
+                          {idEdit === review._id ? (
+                            <>
+                              {" "}
+                              <form onSubmit={handleForm}>
+                                <TextField
+                                  sx={{
+                                    mt: "-21px",
+                                    width: {
+                                      xs: "100px",
+                                      sm: "150px",
+                                      md: "200px",
+                                    },
+                                  }}
+                                  id="standard-basic"
+                                  name="review"
+                                  variant="standard"
+                                  label={review.review}
+                                  required
+                                />
+                                <button type="submit">
+                                  <AddCircleIcon
+                                    sx={{
+                                      fontSize: "30px",
+                                      ml: 2,
+                                      cursor: "pointer",
+                                      "&:hover": { transform: "scale(2)" },
+                                    }}
+                                  ></AddCircleIcon>
+                                </button>
+                              </form>
+                            </>
+                          ) : (
+                            <>{review.review}</>
+                          )}
                         </Typography>
                       </Grid>
                       <Grid item xs={3} md={3} sx={{}}>
                         <Typography sx={{ py: 2 }}>
-                          {" "}
-                          <Stack sx={{ alignItems: "center" }}>
-                            <Rating
-                              sx={{ fontSize: { xs: "16px", sm: "24px" } }}
-                              name="half-rating-read"
-                              defaultValue={review.star}
-                              precision={0.5}
-                              readOnly
-                            />
-                          </Stack>
+                          {idEdit === review._id ? (
+                            <>
+                              <Stack sx={{ alignItems: "center" }}>
+                                <Rating
+                                  name="simple-controlled"
+                                  value={rating}
+                                  precision={0.5}
+                                  onChange={(event, newValue) => {
+                                    setRating(newValue);
+                                  }}
+                                />
+                              </Stack>
+                            </>
+                          ) : (
+                            <>
+                              <Stack sx={{ alignItems: "center" }}>
+                                <Rating
+                                  sx={{ fontSize: { xs: "16px", sm: "24px" } }}
+                                  name="half-rating-read"
+                                  defaultValue={review.star}
+                                  precision={0.5}
+                                  readOnly
+                                />
+                              </Stack>
+                            </>
+                          )}
                         </Typography>
                       </Grid>
                       <Grid item xs={2} md={2} sx={{}}>
@@ -224,6 +307,9 @@ const MyReview = () => {
                               cursor: "pointer",
                               "&:hover": { transform: "scale(2)" },
                             }}
+                            onClick={() => {
+                              setIdEdit(review._id);
+                            }}
                           ></EditIcon>
                           <DeleteIcon
                             sx={{
@@ -232,8 +318,8 @@ const MyReview = () => {
                               "&:hover": { transform: "scale(2)" },
                             }}
                             onClick={() => {
-                              setId(review._id);
-                              deleteReview();
+                              setIdDelete(review._id);
+                              review._id && deleteReview();
                             }}
                           ></DeleteIcon>
                         </Typography>
