@@ -118,7 +118,7 @@ const SingleService = () => {
                 textDecoration: "underline",
                 fontFamily: "overpass,serif-pro",
                 my: 5,
-                fontSize: { xs: "30px", sm: "35px", md: "50px" },
+                fontSize: { xs: "30px", sm: "35px", md: "45px" },
               }}
             >
               {" "}
@@ -176,7 +176,7 @@ const SingleService = () => {
                     color: "black",
                   }}
                 >
-                  Duration: 3 Days
+                  Duration: {data.duration}
                 </Typography>
                 <Typography
                   variant="body2"
@@ -287,7 +287,7 @@ const SingleService = () => {
 
                   <TextField
                     id="review"
-                    label="Review"
+                    label="Add Review"
                     name="textt"
                     variant="outlined"
                     sx={{ width: "80%" }}
