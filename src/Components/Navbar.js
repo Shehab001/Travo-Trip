@@ -77,17 +77,21 @@ function NavBar() {
       >
         <Container maxWidth="lg">
           <Toolbar disableGutters>
-            <Avatar
-              alt="Icon"
-              src="https://res.cloudinary.com/dc9bjecdl/image/upload/v1677643965/travel-101-512_vsaqzq.png"
-              sx={{
-                width: 58,
-                height: 58,
-                display: { xs: "none", md: "flex" },
-                mr: 2,
-                mt: 2,
-              }}
-            />
+            <Link to="/">
+              <Avatar
+                alt="Icon"
+                src="https://res.cloudinary.com/dc9bjecdl/image/upload/v1677643965/travel-101-512_vsaqzq.png"
+                sx={{
+                  width: 58,
+                  height: 58,
+                  display: { xs: "none", md: "flex" },
+                  mr: 2,
+                  mt: 2,
+                  "&:hover": { transform: "scale(1.1)" },
+                }}
+              />
+            </Link>
+
             <Typography
               variant="h6"
               noWrap
@@ -160,11 +164,6 @@ function NavBar() {
                         <a href="#contact">Contact</a>
                       </Typography>
                     </MenuItem>
-                    <MenuItem onClick={handleCloseNavMenu}>
-                      <Typography textAlign="center" color={"black"}>
-                        <Link to="/">Blog</Link>
-                      </Typography>
-                    </MenuItem>
                     {user?.uid && (
                       <>
                         <MenuItem onClick={handleCloseNavMenu}>
@@ -187,26 +186,38 @@ function NavBar() {
                         <Link to="/">Home</Link>
                       </Typography>
                     </MenuItem>
-                    <MenuItem onClick={handleCloseNavMenu}>
-                      <Typography textAlign="center" color={"black"}>
-                        <Link to="/">Blog</Link>
-                      </Typography>
-                    </MenuItem>
+                    {user?.uid && (
+                      <>
+                        <MenuItem onClick={handleCloseNavMenu}>
+                          <Typography textAlign="center" color={"black"}>
+                            <a href="myreview">My Review</a>
+                          </Typography>
+                        </MenuItem>
+                        <MenuItem onClick={handleCloseNavMenu}>
+                          <Typography textAlign="center" color={"black"}>
+                            <Link to="addservice">Add Service</Link>
+                          </Typography>
+                        </MenuItem>
+                      </>
+                    )}
                   </>
                 )}
               </Menu>
             </Box>
+            <Link to="/">
+              <Avatar
+                alt="Icon"
+                src="https://res.cloudinary.com/dc9bjecdl/image/upload/v1677643965/travel-101-512_vsaqzq.png"
+                sx={{
+                  width: 54,
+                  height: 54,
+                  display: { xs: "flex", md: "none" },
+                  mr: 1,
+                  "&:hover": { transform: "scale(1.1)" },
+                }}
+              />
+            </Link>
 
-            <Avatar
-              alt="Icon"
-              src="https://res.cloudinary.com/dc9bjecdl/image/upload/v1677643965/travel-101-512_vsaqzq.png"
-              sx={{
-                width: 54,
-                height: 54,
-                display: { xs: "flex", md: "none" },
-                mr: 1,
-              }}
-            />
             <Typography
               variant="h5"
               noWrap
@@ -285,24 +296,6 @@ function NavBar() {
                   >
                     <a href="#contact">Contact</a>
                   </Button>
-                  <Button
-                    onClick={handleCloseNavMenu}
-                    sx={{
-                      mt: 3,
-                      color: "black",
-                      display: "block",
-                      fontSize: 16,
-                      "&:hover": {
-                        transform: "scale(1.1)",
-                        boxShadow: 5,
-                        transition: "linear .3s",
-                        borderBottom: 3,
-                        borderColor: "black",
-                      },
-                    }}
-                  >
-                    <Link to="/blog">Blog</Link>
-                  </Button>
                 </>
               ) : (
                 <></>
@@ -351,7 +344,10 @@ function NavBar() {
 
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ pt: 2 }}>
+                <IconButton
+                  onClick={handleOpenUserMenu}
+                  sx={{ pt: 2, "&:hover": { transform: "scale(1.1)" } }}
+                >
                   {user?.uid ? (
                     <Avatar
                       sx={{ width: 56, height: 56 }}

@@ -239,7 +239,7 @@ const MyReview = () => {
                                   sx={{
                                     mt: "-21px",
                                     width: {
-                                      xs: "100px",
+                                      xs: "40px",
                                       sm: "150px",
                                       md: "200px",
                                     },
@@ -273,6 +273,7 @@ const MyReview = () => {
                             <>
                               <Stack sx={{ alignItems: "center" }}>
                                 <Rating
+                                  sx={{ fontSize: { xs: "16px", sm: "24px" } }}
                                   name="simple-controlled"
                                   value={rating}
                                   precision={0.5}
